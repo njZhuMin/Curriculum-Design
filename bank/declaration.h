@@ -1,0 +1,11 @@
+//function declaration
+void menu0();
+void menu1();
+void menu2();
+void add_item();
+void change_item();
+void delete_item();
+void display_item();
+void calculate();
+void deposit();
+void withdraw();
