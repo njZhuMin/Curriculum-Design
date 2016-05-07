@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="utf8"></constant>
+	<constant name="struts.objectFactory" value="spring"></constant>
+	
+	<package name="User" namespace="/" extends="json-default">
+		<action name="login" class="com.trade.action.AdminAction" method="login">
+			<result name="suc">/index.jsp</result>
+			<result name="err">/login.jsp</result>
+		</action>
+		<action name="addOperator" class="com.trade.action.AdminAction" method="addOperator">
+			<result name="suc">/addAdminer.jsp</result>
+		</action>
+		<action name="isHasAdminer" class="com.trade.action.AdminAction" method="isHasAdminer">
+			<result name="json" type="json"><param name="root">flag</param></result>
+		</action>
+		<action name="changePwd" class="com.trade.action.AdminAction" method="changePwd">
+			<result name="suc">/changePassword_right.jsp</result>
+			<result name="err">/changePassword_right.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="client" namespace="/" extends="json-default">
+		<action name="addClient" class="com.trade.action.ClientAction" method="addClient">
+			<result name="suc">/companyInfo_right.jsp</result>
+		</action>
+		<action name="findAllClient" class="com.trade.action.ClientAction" method="findAllClient">
+			<result name="admin">/AllClient.jsp</result>
+			<result name="op">/findCompanyInfo_right.jsp</result>
+		</action>
+		<action name="findAllClientOption" class="com.trade.action.ClientAction" method="findAllClientOption">
+			<result name="suc">/findCompanyInfo_right.jsp</result>
+		</action>
+		<action name="findClientById" class="com.trade.action.ClientAction" method="findClientById">
+			<result name="suc">/companyUpdate.jsp</result>
+			<result name="err" type="redirect">findAllClient?msg=delete</result>
+		</action>
+		<action name="findClientBy" class="com.trade.action.ClientAction" method="findClientBy">
+			<result name="suc">/findCompanyInfo_right.jsp</result>
+		</action>
+		<action name="updateClient" class="com.trade.action.ClientAction" method="updateClient">
+			<result name="suc" type="redirect">findAllClient?msg=update</result>
+			<result name="err" type="redirect">findAllClient?msg=delete</result>
+		</action>
+		<action name="deleteClient" class="com.trade.action.ClientAction" method="deleteClient">
+			<result name="suc" type="redirect">findAllClient?msg=delete</result>
+		</action>
+		<action name="findIs" class="com.trade.action.ClientAction" method="findIs">
+			<result name="suc" type="json"><param name="root">flag</param>
+			</result>
+		</action>
+		
+		
+	</package>
+	
+	<package name="sup" namespace="/" extends="json-default">
+		<action name="findIs1" class="com.trade.action.SupAction" method="findIs">
+			<result name="suc" type="json"><param name="root">flag</param> </result>
+		</action>
+		<action name="addSup" class="com.trade.action.SupAction" method="addSup">
+			<result name="suc">/supplierInfo_right.jsp</result>
+		</action>
+
+		<action name="findAllSup" class="com.trade.action.SupAction" method="findAllSup">
+			<result name="suc">/allSup.jsp</result>
+			<result name="op">/findSupplierInfo_right.jsp</result>
+		</action>
+		<action name="findSupById" class="com.trade.action.SupAction" method="findSupById">
+			<result name="suc">/supplier_update.jsp</result>
+			<result name="err" type="redirect">findAllSup?msg=err</result>
+		</action>
+		<action name="updateSup" class="com.trade.action.SupAction" method="updateSup">
+			<result name="suc" type="redirect">findAllSup?msg=update</result>
+			<result name="err" type="redirect">findAllSup?msg=err</result>
+		</action>
+		<action name="deleteSupById" class="com.trade.action.SupAction" method="deleteSupById">
+			<result name="suc" type="redirect">findAllSup?msg=delete</result>
+			<result name="err" type="redirect">findAllSup?msg=err</result>
+		</action>
+		<action name="findAllSupToPro" class="com.trade.action.SupAction" method="findAllSupToPro">
+			<result name="suc">/goodsAdd.jsp</result>
+		</action>
+		<action name="findAllSupOption" class="com.trade.action.SupAction" method="findAllSupOption">
+			<result name="suc">/findSupplierInfo_right.jsp</result>
+		</action>
+		<action name="findSupBy" class="com.trade.action.SupAction" method="findSupBy">
+			<result name="suc">/findSupplierInfo_right.jsp</result>
+		</action>
+		<action name="getSupXml" class="com.trade.action.SupAction" method="getSupXML">
+		<result name="suc">/supplierInfo_right.jsp</result>
+		<result name ="err">/supplierInfo_right.jsp</result>
+		</action>
+	</package>
+	
+	<package name="product" namespace="/" extends="json-default">
+		<action name="isUsed" class="com.trade.action.ProductAction" method="isUsed">
+			<result name="json" type="json"><param name="root">flag</param></result>
+		</action>
+		<action name="addPro" class="com.trade.action.ProductAction" method="addPro">
+			<result name="suc" type="redirect">findAllSupToPro?msg=suc</result>
+			<result name="err" type="redirect">findAllSupToPro?msg=err</result>
+		</action>
+		<action name="findAllPro" class="com.trade.action.ProductAction" method="findAllPro">
+			<result name="admin">/allPro.jsp</result>
+			<result name="op">/findGoodsInfo_right.jsp</result>
+		</action>
+		<action name="findProById" class="com.trade.action.ProductAction" method="findProById">
+			<result name="suc">/goodsUpdate.jsp</result>
+			<result name="err" type="redirect">findAllPro?msg=err</result>
+		</action>
+		<action name="updatePro" class="com.trade.action.ProductAction" method="updatePro">
+			<result name="suc" type="redirect">findAllPro?msg=update</result>
+			<result name="err" type="redirect">findAllPro?msg=err</result>
+		</action>
+		<action name="deletePro" class="com.trade.action.ProductAction" method="deletePro">
+			<result name="suc" type="redirect">findAllPro?msg=delete</result>
+			<result name="err" type="redirect">findAllPro?msg=err</result>
+		</action>
+		<action name="findProBy" class="com.trade.action.ProductAction" method="findProBy">
+			<result name="suc">/findGoodsInfo_right.jsp</result>
+		</action>
+		<action name="findAllOption" class="com.trade.action.ProductAction" method="findAllOption">
+			<result name="suc">/findGoodsInfo_right.jsp</result>
+		</action>
+		<action name="getProXml" class="com.trade.action.ProductAction" method="getProXml">
+		<result name="suc">/goodsAdd.jsp</result>
+		<result name="err">/goodsAdd.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="OrderLine" namespace="/" extends="json-default">
+		<action name="findAllProTuSt" class="com.trade.action.OrderLineAction" method="findAllProTuSt">
+			<result name="suc">/goodsStoreInfo_right.jsp</result>
+		</action>
+		<action name="selectProToSto" class="com.trade.action.OrderLineAction" method="selectProToSto">
+			<result name="suc">/goodsStoreInfo_right.jsp</result>
+		</action>
+				<action name="selectProRetSto" class="com.trade.action.OrderLineAction" method="selectProRetSto">
+			<result name="suc">/goodsStoreReturn_right.jsp</result>
+		</action>
+		<action name="addOrder" class="com.trade.action.OrderLineAction" method="addOrder">
+			<result name="in" type="redirect">findAllProTuSt?flag=addOrder</result>
+			<result name="out" type="redirect">findAllProTuSt?flag=returnOrder</result>
+			<result name="err" type="redirect">findAllProTuSt?flag=err</result>
+		</action>
+		<action name="findStoProTuSt" class="com.trade.action.OrderLineAction" method="findStoProTuSt">
+			<result name="suc">/goodsStoreReturn_right.jsp</result>
+		</action>
+		<action name="findProInSto" class="com.trade.action.OrderLineAction" method="findProInSto">
+			<result name="suc">/StockInfo_right.jsp</result>
+		</action>
+		<action name="findOneProInSto" class="com.trade.action.OrderLineAction" method="findOneProInSto">
+			<result name="suc">/StockInfo_right.jsp</result>
+		</action>
+		<action name="findAllProInSto" class="com.trade.action.OrderLineAction" method="findAllProInSto">
+			<result name="suc">/StockInfo_right.jsp</result>
+		</action>
+		<action name="findAllOrderIn" class="com.trade.action.OrderLineAction" method="findAllOrderIn">
+			<result name="suc">/allOrderIn.jsp</result>
+		</action>
+		<action name="findAllOrderRe" class="com.trade.action.OrderLineAction" method="findAllOrderRe">
+			<result name="suc">/allOrderRe.jsp</result>
+		</action>
+		<action name="xmlForOrderLineIn" class="com.trade.action.OrderLineAction" method="xmlForOrderLineIn">
+			<result name="in" type="redirect">findAllOrderIn?style=downinsuc</result>
+			<result name="err" type="redirect">findAllOrderRe?style=downinerr</result>
+		</action>
+		<action name="PayAllMoney" class="com.trade.action.OrderLineAction" method="PayAllMoney">
+			<result name="in" type="redirect">findAllOrderIn?style=in</result>
+			<result name="out" type="redirect">findAllOrderRe?style=out</result>
+		</action>
+		<action name="findPayedOrderIn" class = "com.trade.action.OrderLineAction" method="findPayedOrderIn">
+			<result name="suc">/allOrderIn.jsp</result>
+		</action>
+		<action name="findPayedOrderRe" class="com.trade.action.OrderLineAction" method="findPayedOrderRe">
+			<result name="suc">/allOrderRe.jsp</result>
+		</action>
+		
+	</package>
+	
+	
+</struts>
